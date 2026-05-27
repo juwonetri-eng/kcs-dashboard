@@ -1,0 +1,3368 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KCS 2023-2026 기술 분야별 동향 분석 · ETRI 반도체연구정책센터</title>
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" as="style" crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<style>
+:root {
+  --ink: #1a1a1a; --ink-soft: #4a4a4a; --ink-mute: #8a8a8a; --ink-faint: #c0c0c0;
+  --paper: #f6f1e8; --paper-deep: #efe8da; --paper-card: #fdfaf2;
+  --rule: #d4cdb8; --rule-soft: #e6dfca;
+  --accent: #b8420b; --accent-soft: #d97048; --accent-bg: rgba(184,66,11,0.06);
+  --teal: #1c5b66; --gold: #a0791b;
+  --growth-up: #2d6e3e; --growth-down: #b53a3a;
+  --q1: #2d6e3e; /* top-right: 핵심부상 */
+  --q2: #b8420b; /* top-left: 신흥 */
+  --q3: #8a8a8a; /* bottom-left: 비주류 */
+  --q4: #1c5b66; /* bottom-right: 주류·성숙 */
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+  background: var(--paper); color: var(--ink); line-height: 1.55;
+}
+.serif { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
+.mono { font-family: 'IBM Plex Mono', monospace; }
+.wrap { max-width: 1280px; margin: 0 auto; padding: 56px 48px 80px; }
+
+/* =========== Masthead =========== */
+.masthead {
+  border-bottom: 2px solid var(--ink); padding-bottom: 28px; margin-bottom: 32px;
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 32px;
+}
+.masthead-left .eyebrow {
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent); font-weight: 600; margin-bottom: 12px;
+}
+.masthead-left h1 {
+  font-family: 'Fraunces', serif; font-weight: 600;
+  font-size: 44px; line-height: 1.05; letter-spacing: -0.02em;
+}
+.masthead-left h1 .accent { color: var(--accent); font-style: italic; }
+.masthead-left .sub { font-size: 14px; color: var(--ink-soft); margin-top: 10px; line-height: 1.4; }
+.masthead-right {
+  text-align: right; font-size: 12px; color: var(--ink-mute);
+  font-family: 'IBM Plex Mono', monospace; line-height: 1.7;
+}
+.masthead-right .org { color: var(--ink); font-weight: 500; }
+
+/* =========== Year Tabs =========== */
+.year-tabs {
+  display: flex; gap: 2px; margin-bottom: 28px;
+  border-bottom: 1px solid var(--rule);
+}
+.year-tab {
+  flex: 1;
+  padding: 14px 18px; cursor: pointer;
+  background: var(--paper-deep); border: 1px solid var(--rule);
+  border-bottom: none;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 13px; color: var(--ink-mute);
+  text-align: left;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  transition: all 0.15s;
+}
+.year-tab:hover { color: var(--ink); background: var(--paper-card); }
+.year-tab.active {
+  background: var(--paper-card);
+  color: var(--accent);
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: -1px;
+  position: relative;
+  z-index: 2;
+}
+.year-tab .year-num {
+  font-family: 'Fraunces', serif;
+  font-size: 22px; font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.year-tab .year-total {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-mute);
+}
+.year-tab.active .year-total { color: var(--accent); }
+
+/* =========== Year Banner =========== */
+.year-banner {
+  background: var(--paper-card); border: 1px solid var(--rule);
+  padding: 24px 28px; margin-bottom: 36px;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 24px; align-items: center;
+}
+.year-banner-title { font-size: 14px; color: var(--ink); }
+.year-banner-title .name {
+  font-family: 'Fraunces', serif; font-weight: 600;
+  font-size: 24px; letter-spacing: -0.01em;
+  color: var(--ink); display: block; margin-bottom: 4px;
+}
+.year-banner-title .subtitle {
+  font-size: 12px; color: var(--ink-mute);
+  font-family: 'IBM Plex Mono', monospace;
+}
+.year-banner-stat {
+  border-left: 1px solid var(--rule); padding-left: 20px;
+}
+.year-banner-stat .label {
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-mute); margin-bottom: 4px;
+}
+.year-banner-stat .value {
+  font-family: 'Fraunces', serif;
+  font-size: 28px; font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.year-banner-stat .value .unit { font-size: 13px; color: var(--ink-mute); margin-left: 2px; }
+.year-banner-stat .delta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; margin-top: 2px; color: var(--ink-mute);
+}
+.year-banner-stat .delta.up { color: var(--growth-up); }
+.year-banner-stat .delta.down { color: var(--growth-down); }
+
+/* =========== Section =========== */
+.section { margin-bottom: 56px; }
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--rule);
+}
+.section-head .num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--accent);
+  letter-spacing: 0.15em; margin-right: 12px;
+}
+.section-head h2 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 26px; letter-spacing: -0.01em; display: inline;
+}
+.section-head .desc {
+  font-size: 12px; color: var(--ink-mute);
+  margin-left: auto; text-align: right;
+  max-width: 420px; line-height: 1.5;
+}
+
+/* =========== Metric definitions card =========== */
+.metric-defs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--rule);
+  margin-bottom: 20px;
+  background: var(--paper-card);
+}
+.metric-def { padding: 16px 22px; border-right: 1px solid var(--rule); }
+.metric-def:last-child { border-right: none; }
+.metric-def .axis {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em;
+  color: var(--accent); margin-bottom: 4px; font-weight: 600;
+}
+.metric-def .name {
+  font-size: 16px; font-weight: 600; color: var(--ink);
+  margin-bottom: 6px;
+}
+.metric-def .desc {
+  font-size: 12px; color: var(--ink-soft); line-height: 1.5;
+}
+.metric-def .desc .hi { color: var(--accent); font-weight: 600; }
+
+/* =========== Strategic Diagram =========== */
+.strat-container {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+}
+.strat-main {
+  background: var(--paper-card); border: 1px solid var(--rule);
+  position: relative;
+}
+.strat-chart-wrapper {
+  height: 540px; padding: 20px 28px 24px;
+  position: relative;
+}
+/* 사분면 레전드 - 차트 상단 띠 (점을 안 가림) */
+.quad-legend-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-deep);
+}
+.quad-legend-bar .ql-item {
+  flex: 1;
+  min-width: 140px;
+  padding: 10px 16px;
+  border-right: 1px solid var(--rule);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.quad-legend-bar .ql-item:last-child { border-right: none; }
+.quad-legend-bar .dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1.5px solid currentColor;
+  display: inline-block;
+}
+.quad-legend-bar .ql-item .text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+.quad-legend-bar .ql-item .text .name {
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+}
+.quad-legend-bar .ql-item .text .desc-sub {
+  color: var(--ink-mute);
+  font-size: 10px;
+  margin-top: 1px;
+}
+
+/* 사분면별 색상 (점 + 텍스트 강조) */
+.ql-item.q-rise { color: #2d6e3e; }
+.ql-item.q-new { color: #b8420b; }
+.ql-item.q-mature { color: #1c5b66; }
+.ql-item.q-minor { color: #8a8a8a; }
+
+.chart-tab-bar {
+  display: flex;
+  border-bottom: 1px solid var(--rule);
+}
+.chart-tab {
+  padding: 12px 22px;
+  font-size: 12px;
+  color: var(--ink-mute);
+  cursor: pointer;
+  border-right: 1px solid var(--rule);
+  background: var(--paper-deep);
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+.chart-tab:hover { color: var(--ink); }
+.chart-tab.active {
+  background: var(--paper-card);
+  color: var(--accent);
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: -1px;
+}
+
+/* Side panel */
+.strat-side {
+  background: var(--paper-card); border: 1px solid var(--rule);
+  padding: 22px; max-height: 700px; overflow-y: auto;
+}
+.side-empty {
+  text-align: center; padding: 32px 16px; color: var(--ink-mute);
+  font-size: 13px; line-height: 1.6;
+}
+.side-empty .icon {
+  font-family: 'Fraunces', serif; font-size: 32px;
+  display: block; margin-bottom: 12px; color: var(--accent-soft);
+}
+.detail-head {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 14px; margin-bottom: 14px;
+}
+.detail-code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: 0.12em;
+  color: var(--accent); font-weight: 600; margin-bottom: 4px;
+}
+.detail-name {
+  font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.3;
+}
+.detail-en {
+  font-size: 11px; color: var(--ink-mute);
+  font-family: 'IBM Plex Mono', monospace; margin-top: 4px;
+}
+.detail-quadrant {
+  display: inline-block;
+  font-size: 11px; padding: 3px 8px;
+  margin-top: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  border: 1px solid currentColor;
+}
+
+.detail-stats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; border: 1px solid var(--rule);
+  margin-bottom: 16px;
+}
+.detail-stat { padding: 10px 12px; border-right: 1px solid var(--rule); }
+.detail-stat:last-child { border-right: none; }
+.detail-stat .label {
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-mute); margin-bottom: 4px;
+}
+.detail-stat .value {
+  font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; line-height: 1;
+}
+
+.detail-section-title {
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-soft); margin-bottom: 8px; font-weight: 600;
+  margin-top: 14px;
+}
+.yearly-bars {
+  display: grid; grid-template-columns: 30px 1fr 36px;
+  gap: 8px; align-items: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; padding: 4px 0;
+}
+.ybars-label { color: var(--ink-mute); }
+.ybars-bar {
+  height: 12px; background: var(--paper-deep); position: relative;
+}
+.ybars-fill {
+  height: 100%; background: var(--accent); opacity: 0.85;
+}
+.ybars-fill.highlighted {
+  background: var(--accent); opacity: 1;
+  box-shadow: 0 0 0 1px var(--ink);
+}
+.ybars-num {
+  text-align: right; font-weight: 600; color: var(--ink);
+}
+
+/* =========== Data Table =========== */
+.compare-table {
+  width: 100%; border-collapse: collapse;
+  background: var(--paper-card); border: 1px solid var(--rule);
+}
+.compare-table thead th {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-mute); padding: 12px 16px;
+  text-align: left; border-bottom: 1px solid var(--rule);
+  background: var(--paper-deep); font-weight: 500;
+}
+.compare-table thead th.num { text-align: right; }
+.compare-table tbody tr {
+  border-bottom: 1px dashed rgba(212,205,184,0.6);
+  transition: background 0.15s; cursor: pointer;
+}
+.compare-table tbody tr:hover { background: var(--accent-bg); }
+.compare-table tbody tr.year-zero { opacity: 0.35; }
+.compare-table tbody td { padding: 10px 16px; font-size: 13px; }
+.compare-table tbody td.num {
+  font-family: 'Fraunces', serif;
+  font-size: 16px; font-weight: 500; text-align: right;
+}
+.compare-table tbody td.code {
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--accent); font-weight: 600;
+  font-size: 12px; letter-spacing: 0.05em; width: 50px;
+}
+.activity-chip {
+  display: inline-block; padding: 2px 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 600;
+  border-radius: 2px;
+}
+.activity-chip.high { background: rgba(45,110,62,0.15); color: var(--growth-up); }
+.activity-chip.mid { background: rgba(160,121,27,0.15); color: var(--gold); }
+.activity-chip.low { background: rgba(181,58,58,0.12); color: var(--growth-down); }
+
+/* mini sparkline */
+.spark {
+  display: inline-flex; align-items: flex-end; gap: 2px;
+  height: 22px;
+}
+.spark-bar {
+  width: 6px; background: var(--accent); opacity: 0.5;
+}
+.spark-bar.highlight { opacity: 1; box-shadow: 0 0 0 1px var(--ink); }
+
+/* =========== Search =========== */
+.search-bar {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--paper-card); border: 1px solid var(--rule);
+  padding: 12px 18px; margin-bottom: 24px;
+}
+.search-input {
+  flex: 1; background: transparent; border: none; outline: none;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 14px; color: var(--ink);
+}
+.search-input::placeholder { color: var(--ink-mute); }
+.search-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--ink-mute);
+}
+.search-clear {
+  cursor: pointer; padding: 3px 10px;
+  background: transparent; border: 1px solid var(--rule);
+  font-size: 11px; color: var(--ink-soft);
+  font-family: 'IBM Plex Mono', monospace;
+}
+.search-clear:hover { background: var(--paper-deep); }
+
+/* =========== Footer =========== */
+footer {
+  margin-top: 80px; padding-top: 24px;
+  border-top: 2px solid var(--ink);
+  font-size: 11px; color: var(--ink-mute);
+  font-family: 'IBM Plex Mono', monospace;
+  line-height: 1.7;
+  display: flex; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+footer .note { max-width: 720px; line-height: 1.6; }
+
+.caveat {
+  background: rgba(160,121,27,0.08);
+  border-left: 3px solid var(--gold);
+  padding: 10px 16px; margin: 0 0 28px;
+  font-size: 12px; color: var(--ink-soft);
+  line-height: 1.5;
+}
+.caveat strong { color: var(--gold); }
+
+/* =========== Responsive =========== */
+@media (max-width: 1100px) {
+  .strat-container { grid-template-columns: 1fr; }
+  .year-banner { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px) {
+  .wrap { padding: 28px 14px; }
+  .masthead { flex-direction: column; align-items: flex-start; }
+  .masthead-right { text-align: left; }
+  .masthead-left h1 { font-size: 30px; }
+  .year-tabs { flex-wrap: wrap; }
+  .year-tab { flex: 1 1 30%; padding: 10px 12px; }
+  .year-banner { grid-template-columns: 1fr; gap: 14px; }
+  .year-banner-stat { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 12px; }
+  .metric-defs { grid-template-columns: 1fr; }
+  .metric-def { border-right: none; border-bottom: 1px solid var(--rule); }
+  .strat-chart-wrapper { height: 420px; padding: 12px 8px 16px; }
+  .quad-legend-bar { flex-direction: column; }
+  .quad-legend-bar .ql-item { border-right: none; border-bottom: 1px solid var(--rule); padding: 8px 12px; }
+  .quad-legend-bar .ql-item:last-child { border-bottom: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <div class="masthead-left">
+    <div class="eyebrow">KCS 2023-2026 · 기술 분야별 동향 분석</div>
+    <h1>4년간 반도체학회<br>발표 <span class="serif accent">동향</span></h1>
+    <p class="sub">제30회(2023) → 제33회(2026) — 규모성과 활동성 두 축으로 본 기술 분야별 부상 양상 (총 5,581건 분석)</p>
+  </div>
+  <div class="masthead-right">
+    <div class="org">ETRI 반도체연구정책센터</div>
+    <div>분석 일자 · <span id="genDate"></span></div>
+    <div>v3.0 · interactive</div>
+  </div>
+</header>
+
+<!-- ============ YEAR TABS ============ -->
+<div class="year-tabs" id="yearTabs"></div>
+
+<!-- ============ YEAR BANNER (선택된 연도 메트릭) ============ -->
+<div class="year-banner" id="yearBanner"></div>
+
+<!-- ============ METRIC DEFINITIONS ============ -->
+<section class="section">
+  <div class="section-head">
+    <div><span class="num">01</span><h2>기술 분야별 동향 (규모성 × 활동성)</h2></div>
+    <div class="desc">분과·키워드를 두 축에 매핑. 점을 <strong>호버</strong>하면 상세값, <strong>클릭</strong>하면 우측 패널에서 자세히 확인.</div>
+  </div>
+
+  <div class="metric-defs">
+    <div class="metric-def">
+      <div class="axis">X축 · SCALE</div>
+      <div class="name">규모성 (Scale)</div>
+      <div class="desc">4년간 누적 발표 수. <span class="hi">연구의 양적 확산 정도</span>를 나타냄. 클수록 해당 분야의 연구 풀이 두텁다는 의미.</div>
+    </div>
+    <div class="metric-def">
+      <div class="axis">Y축 · ACTIVITY</div>
+      <div class="name">활동성 (Activity Index)</div>
+      <div class="desc">(최근 2년 비중 ÷ 균등 기대치). <strong>1.0 = 균등</strong>, &gt;1.0 = 최근 집중. <span class="hi">기술의 최신성·부상 가능성</span>을 나타냄.</div>
+    </div>
+  </div>
+
+  <div class="strat-container">
+    <div class="strat-main">
+      <div class="chart-tab-bar">
+        <div class="chart-tab active" data-mode="category">분과별 <span style="opacity:0.6;margin-left:4px;" id="catNum"></span></div>
+        <div class="chart-tab" data-mode="keyword">키워드별 <span style="opacity:0.6;margin-left:4px;" id="kwNum"></span></div>
+        <div class="chart-tab" data-mode="affil">기관별 <span style="opacity:0.6;margin-left:4px;" id="afNum"></span></div>
+      </div>
+      <div class="quad-legend-bar">
+        <div class="ql-item q-new">
+          <span class="dot"></span>
+          <span class="text">
+            <span class="name">신흥</span>
+            <span class="desc-sub">작지만 급성장</span>
+          </span>
+        </div>
+        <div class="ql-item q-rise">
+          <span class="dot"></span>
+          <span class="text">
+            <span class="name">핵심 부상</span>
+            <span class="desc-sub">크고 성장 중</span>
+          </span>
+        </div>
+        <div class="ql-item q-mature">
+          <span class="dot"></span>
+          <span class="text">
+            <span class="name">주류·성숙</span>
+            <span class="desc-sub">크지만 정체</span>
+          </span>
+        </div>
+        <div class="ql-item q-minor">
+          <span class="dot"></span>
+          <span class="text">
+            <span class="name">비주류</span>
+            <span class="desc-sub">작고 정체</span>
+          </span>
+        </div>
+      </div>
+      <div class="strat-chart-wrapper">
+        <canvas id="stratChart"></canvas>
+      </div>
+    </div>
+
+    <aside class="strat-side" id="sidePanel">
+      <div class="side-empty">
+        <span class="icon serif">↻</span>
+        그래프에서 점을 클릭하면<br>상세 정보가 여기에 나타나요.
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ SEARCH ============ -->
+<div class="search-bar">
+  <div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--ink-soft);position:relative;">
+    <div style="position:absolute;right:-5px;bottom:-5px;width:8px;height:2px;background:var(--ink-soft);transform:rotate(45deg);"></div>
+  </div>
+  <input class="search-input" id="searchInput" type="text"
+         placeholder="분과/키워드/기관 검색 (예: GaN, 메모리, 서울대)">
+  <span class="search-meta" id="searchMeta"></span>
+  <button class="search-clear" id="searchClear" style="display:none;">지우기</button>
+</div>
+
+<!-- ============ DATA TABLE ============ -->
+<section class="section">
+  <div class="section-head">
+    <div><span class="num">02</span><h2 id="tableTitle">분과별 4년 데이터</h2></div>
+    <div class="desc">행을 클릭하면 그래프에서 해당 항목이 강조됩니다. 활동성 색상 — <span style="color:var(--growth-up);">●</span> &gt;1.15 / <span style="color:var(--gold);">●</span> 0.85~1.15 / <span style="color:var(--growth-down);">●</span> &lt;0.85</div>
+  </div>
+  <table class="compare-table" id="dataTable">
+    <thead><tr id="tableHead"></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<footer>
+  <div class="note">
+    <strong style="color:var(--ink);">방법론:</strong>
+    KCS 2023~2026 프로그램북 4종 자동 파싱(총 5,581건). 분과는 공식 모집분야(A∼V) 21개 + 특별세션 기준.
+    키워드는 약 95개 반도체 기술 용어 사전 정규식 매칭.
+    <strong>활동성 = (2025+2026 발표수 ÷ 전체 발표수) × 2</strong>로 정의 — 균등 분포일 때 1.0, 최근 2년 집중일수록 ↑.
+    <span style="color:var(--gold);">KCS 2025 PDF는 포스터 섹션 위주로 구두 발표가 부분 수록되어 있어 2025년 절대 수치는 다소 보수적으로 잡혔습니다.</span>
+  </div>
+  <div>ETRI 반도체연구정책센터 · v3.0</div>
+</footer>
+
+</div>
+
+<script id="dashData" type="application/json">
+{
+  "years": [
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "year_meta": {
+    "2023": {
+      "year": 2023,
+      "title": "KCS 2023",
+      "subtitle": "Semiconductor Industry & Technology Innovation",
+      "total": 1208,
+      "oral": 338,
+      "poster": 870
+    },
+    "2024": {
+      "year": 2024,
+      "title": "KCS 2024",
+      "subtitle": "Semiconductor Toward New Trends",
+      "total": 1341,
+      "oral": 419,
+      "poster": 922
+    },
+    "2025": {
+      "year": 2025,
+      "title": "KCS 2025",
+      "subtitle": "Future Normal in Semiconductor",
+      "total": 1171,
+      "oral": 6,
+      "poster": 1165
+    },
+    "2026": {
+      "year": 2026,
+      "title": "KCS 2026",
+      "subtitle": "Paradigm Shift in Semiconductors for AI Era",
+      "total": 1861,
+      "oral": 424,
+      "poster": 1437
+    }
+  },
+  "year_breakdown": {
+    "2023": {
+      "categories": {
+        "D": 165,
+        "A": 30,
+        "J": 106,
+        "H": 41,
+        "K": 111,
+        "B": 38,
+        "I": 42,
+        "Q": 37,
+        "S": 72,
+        "G": 65,
+        "F": 82,
+        "R": 13,
+        "C": 73,
+        "E": 50,
+        "P": 62,
+        "O": 25,
+        "T": 19,
+        "L": 28,
+        "M": 20,
+        "N": 16,
+        "U": 113
+      },
+      "top_keywords": [
+        {
+          "kw": "ALD",
+          "n": 75
+        },
+        {
+          "kw": "강유전체",
+          "n": 59
+        },
+        {
+          "kw": "TMD(2D)",
+          "n": 52
+        },
+        {
+          "kw": "ReRAM/Memristor",
+          "n": 49
+        },
+        {
+          "kw": "뉴로모픽",
+          "n": 43
+        },
+        {
+          "kw": "IGZO/산화물 반도체",
+          "n": 40
+        },
+        {
+          "kw": "HfO₂/HZO",
+          "n": 34
+        },
+        {
+          "kw": "TFT",
+          "n": 30
+        },
+        {
+          "kw": "GaN",
+          "n": 30
+        },
+        {
+          "kw": "DRAM",
+          "n": 27
+        },
+        {
+          "kw": "Ga₂O₃",
+          "n": 25
+        },
+        {
+          "kw": "Flexible/Wearable",
+          "n": 23
+        },
+        {
+          "kw": "Diamond",
+          "n": 19
+        },
+        {
+          "kw": "ADC/DAC",
+          "n": 18
+        },
+        {
+          "kw": "3D NAND",
+          "n": 18
+        },
+        {
+          "kw": "Perovskite",
+          "n": 16
+        },
+        {
+          "kw": "AlGaN",
+          "n": 15
+        },
+        {
+          "kw": "Flash 메모리",
+          "n": 14
+        },
+        {
+          "kw": "가스센서",
+          "n": 14
+        },
+        {
+          "kw": "인공 시냅스",
+          "n": 13
+        },
+        {
+          "kw": "딥러닝/ML",
+          "n": 12
+        },
+        {
+          "kw": "배터리·슈퍼커패시터",
+          "n": 11
+        },
+        {
+          "kw": "광검출기/광트랜지스터",
+          "n": 11
+        },
+        {
+          "kw": "SiC",
+          "n": 11
+        },
+        {
+          "kw": "MOSFET",
+          "n": 11
+        },
+        {
+          "kw": "EUV",
+          "n": 10
+        },
+        {
+          "kw": "h-BN",
+          "n": 10
+        },
+        {
+          "kw": "GAA/Nanosheet FET",
+          "n": 10
+        },
+        {
+          "kw": "태양전지",
+          "n": 10
+        },
+        {
+          "kw": "Spiking NN",
+          "n": 9
+        }
+      ],
+      "top_affiliations": [
+        {
+          "affil": "서울대학교",
+          "n": 141
+        },
+        {
+          "affil": "KIST",
+          "n": 90
+        },
+        {
+          "affil": "성균관대학교",
+          "n": 72
+        },
+        {
+          "affil": "한양대학교",
+          "n": 71
+        },
+        {
+          "affil": "KAIST",
+          "n": 71
+        },
+        {
+          "affil": "고려대학교",
+          "n": 69
+        },
+        {
+          "affil": "아주대학교",
+          "n": 47
+        },
+        {
+          "affil": "연세대학교",
+          "n": 46
+        },
+        {
+          "affil": "POSTECH",
+          "n": 45
+        },
+        {
+          "affil": "UST",
+          "n": 43
+        },
+        {
+          "affil": "UNIST",
+          "n": 39
+        },
+        {
+          "affil": "충남대학교",
+          "n": 35
+        },
+        {
+          "affil": "경희대학교",
+          "n": 34
+        },
+        {
+          "affil": "세종대학교",
+          "n": 34
+        },
+        {
+          "affil": "홍익대학교",
+          "n": 33
+        },
+        {
+          "affil": "경북대학교",
+          "n": 33
+        },
+        {
+          "affil": "인하대학교",
+          "n": 29
+        },
+        {
+          "affil": "서울과학기술대학교",
+          "n": 28
+        },
+        {
+          "affil": "삼성전자",
+          "n": 28
+        },
+        {
+          "affil": "SK하이닉스",
+          "n": 27
+        }
+      ]
+    },
+    "2024": {
+      "categories": {
+        "L": 20,
+        "H": 69,
+        "J": 87,
+        "P": 24,
+        "E": 58,
+        "C": 45,
+        "K": 146,
+        "D": 161,
+        "A": 55,
+        "G": 95,
+        "Q": 46,
+        "B": 48,
+        "V": 208,
+        "M": 12,
+        "F": 78,
+        "N": 22,
+        "I": 58,
+        "S": 55,
+        "O": 16,
+        "U": 14,
+        "R": 5,
+        "T": 19
+      },
+      "top_keywords": [
+        {
+          "kw": "ALD",
+          "n": 71
+        },
+        {
+          "kw": "강유전체",
+          "n": 68
+        },
+        {
+          "kw": "TMD(2D)",
+          "n": 66
+        },
+        {
+          "kw": "IGZO/산화물 반도체",
+          "n": 59
+        },
+        {
+          "kw": "ReRAM/Memristor",
+          "n": 48
+        },
+        {
+          "kw": "TFT",
+          "n": 48
+        },
+        {
+          "kw": "HfO₂/HZO",
+          "n": 46
+        },
+        {
+          "kw": "DRAM",
+          "n": 40
+        },
+        {
+          "kw": "GaN",
+          "n": 34
+        },
+        {
+          "kw": "뉴로모픽",
+          "n": 29
+        },
+        {
+          "kw": "Flexible/Wearable",
+          "n": 29
+        },
+        {
+          "kw": "3D NAND",
+          "n": 28
+        },
+        {
+          "kw": "SiC",
+          "n": 23
+        },
+        {
+          "kw": "ADC/DAC",
+          "n": 16
+        },
+        {
+          "kw": "EUV",
+          "n": 15
+        },
+        {
+          "kw": "이미지센서",
+          "n": 14
+        },
+        {
+          "kw": "Flash 메모리",
+          "n": 14
+        },
+        {
+          "kw": "Quantum Dot",
+          "n": 13
+        },
+        {
+          "kw": "전력반도체",
+          "n": 13
+        },
+        {
+          "kw": "PIM/IMC",
+          "n": 13
+        },
+        {
+          "kw": "패키징(일반)",
+          "n": 13
+        },
+        {
+          "kw": "딥러닝/ML",
+          "n": 13
+        },
+        {
+          "kw": "MOSFET",
+          "n": 12
+        },
+        {
+          "kw": "Perovskite",
+          "n": 12
+        },
+        {
+          "kw": "인공 시냅스",
+          "n": 12
+        },
+        {
+          "kw": "광검출기/광트랜지스터",
+          "n": 11
+        },
+        {
+          "kw": "GAA/Nanosheet FET",
+          "n": 11
+        },
+        {
+          "kw": "Ga₂O₃",
+          "n": 10
+        },
+        {
+          "kw": "SRAM",
+          "n": 10
+        },
+        {
+          "kw": "태양전지",
+          "n": 9
+        }
+      ],
+      "top_affiliations": [
+        {
+          "affil": "서울대학교",
+          "n": 103
+        },
+        {
+          "affil": "성균관대학교",
+          "n": 103
+        },
+        {
+          "affil": "한양대학교",
+          "n": 93
+        },
+        {
+          "affil": "POSTECH",
+          "n": 77
+        },
+        {
+          "affil": "고려대학교",
+          "n": 73
+        },
+        {
+          "affil": "KAIST",
+          "n": 72
+        },
+        {
+          "affil": "경북대학교",
+          "n": 57
+        },
+        {
+          "affil": "KIST",
+          "n": 51
+        },
+        {
+          "affil": "서울과학기술대학교",
+          "n": 48
+        },
+        {
+          "affil": "UNIST",
+          "n": 43
+        },
+        {
+          "affil": "연세대학교",
+          "n": 42
+        },
+        {
+          "affil": "UST",
+          "n": 38
+        },
+        {
+          "affil": "경희대학교",
+          "n": 37
+        },
+        {
+          "affil": "국민대학교",
+          "n": 36
+        },
+        {
+          "affil": "삼성전자",
+          "n": 35
+        },
+        {
+          "affil": "서강대학교",
+          "n": 34
+        },
+        {
+          "affil": "홍익대학교",
+          "n": 32
+        },
+        {
+          "affil": "충남대학교",
+          "n": 32
+        },
+        {
+          "affil": "광운대학교",
+          "n": 32
+        },
+        {
+          "affil": "SK하이닉스",
+          "n": 31
+        }
+      ]
+    },
+    "2025": {
+      "categories": {
+        "F": 96,
+        "G": 115,
+        "H": 8,
+        "D": 160,
+        "M": 24,
+        "P": 45,
+        "J": 123,
+        "K": 142,
+        "L": 39,
+        "O": 5,
+        "A": 71,
+        "B": 28,
+        "C": 54,
+        "N": 12,
+        "E": 37,
+        "I": 40,
+        "Q": 32,
+        "R": 3,
+        "T": 29,
+        "U": 9,
+        "S": 91,
+        "V": 8
+      },
+      "top_keywords": [
+        {
+          "kw": "ALD",
+          "n": 57
+        },
+        {
+          "kw": "TMD(2D)",
+          "n": 52
+        },
+        {
+          "kw": "강유전체",
+          "n": 44
+        },
+        {
+          "kw": "ReRAM/Memristor",
+          "n": 42
+        },
+        {
+          "kw": "IGZO/산화물 반도체",
+          "n": 40
+        },
+        {
+          "kw": "TFT",
+          "n": 34
+        },
+        {
+          "kw": "DRAM",
+          "n": 33
+        },
+        {
+          "kw": "3D NAND",
+          "n": 26
+        },
+        {
+          "kw": "HfO₂/HZO",
+          "n": 25
+        },
+        {
+          "kw": "GaN",
+          "n": 23
+        },
+        {
+          "kw": "뉴로모픽",
+          "n": 21
+        },
+        {
+          "kw": "Flexible/Wearable",
+          "n": 19
+        },
+        {
+          "kw": "SiC",
+          "n": 16
+        },
+        {
+          "kw": "Ga₂O₃",
+          "n": 15
+        },
+        {
+          "kw": "Flash 메모리",
+          "n": 14
+        },
+        {
+          "kw": "Perovskite",
+          "n": 13
+        },
+        {
+          "kw": "GAA/Nanosheet FET",
+          "n": 12
+        },
+        {
+          "kw": "딥러닝/ML",
+          "n": 12
+        },
+        {
+          "kw": "인공 시냅스",
+          "n": 12
+        },
+        {
+          "kw": "ADC/DAC",
+          "n": 12
+        },
+        {
+          "kw": "광검출기/광트랜지스터",
+          "n": 11
+        },
+        {
+          "kw": "Spiking NN",
+          "n": 10
+        },
+        {
+          "kw": "MOSFET",
+          "n": 10
+        },
+        {
+          "kw": "패키징(일반)",
+          "n": 10
+        },
+        {
+          "kw": "이미지센서",
+          "n": 10
+        },
+        {
+          "kw": "가스센서",
+          "n": 9
+        },
+        {
+          "kw": "EUV",
+          "n": 9
+        },
+        {
+          "kw": "Lithography(일반)",
+          "n": 9
+        },
+        {
+          "kw": "AI 프로세서",
+          "n": 9
+        },
+        {
+          "kw": "OLED",
+          "n": 9
+        }
+      ],
+      "top_affiliations": [
+        {
+          "affil": "서울대학교",
+          "n": 117
+        },
+        {
+          "affil": "고려대학교",
+          "n": 75
+        },
+        {
+          "affil": "한양대학교",
+          "n": 75
+        },
+        {
+          "affil": "성균관대학교",
+          "n": 69
+        },
+        {
+          "affil": "KIST",
+          "n": 66
+        },
+        {
+          "affil": "POSTECH",
+          "n": 58
+        },
+        {
+          "affil": "UST",
+          "n": 55
+        },
+        {
+          "affil": "서울과학기술대학교",
+          "n": 55
+        },
+        {
+          "affil": "서강대학교",
+          "n": 44
+        },
+        {
+          "affil": "가천대학교",
+          "n": 39
+        },
+        {
+          "affil": "KAIST",
+          "n": 36
+        },
+        {
+          "affil": "연세대학교",
+          "n": 35
+        },
+        {
+          "affil": "UNIST",
+          "n": 33
+        },
+        {
+          "affil": "아주대학교",
+          "n": 33
+        },
+        {
+          "affil": "홍익대학교",
+          "n": 32
+        },
+        {
+          "affil": "경북대학교",
+          "n": 31
+        },
+        {
+          "affil": "충북대학교",
+          "n": 26
+        },
+        {
+          "affil": "서울시립대학교",
+          "n": 24
+        },
+        {
+          "affil": "인하대학교",
+          "n": 24
+        },
+        {
+          "affil": "광운대학교",
+          "n": 23
+        }
+      ]
+    },
+    "2026": {
+      "categories": {
+        "D": 320,
+        "K": 253,
+        "J": 182,
+        "E": 93,
+        "A": 121,
+        "G": 148,
+        "F": 89,
+        "H": 75,
+        "V": 19,
+        "M": 18,
+        "I": 91,
+        "R": 8,
+        "C": 72,
+        "S": 86,
+        "T": 45,
+        "B": 56,
+        "Q": 48,
+        "P": 43,
+        "N": 29,
+        "O": 23,
+        "U": 13,
+        "L": 29
+      },
+      "top_keywords": [
+        {
+          "kw": "ALD",
+          "n": 111
+        },
+        {
+          "kw": "강유전체",
+          "n": 104
+        },
+        {
+          "kw": "TMD(2D)",
+          "n": 88
+        },
+        {
+          "kw": "IGZO/산화물 반도체",
+          "n": 82
+        },
+        {
+          "kw": "HfO₂/HZO",
+          "n": 78
+        },
+        {
+          "kw": "ReRAM/Memristor",
+          "n": 77
+        },
+        {
+          "kw": "DRAM",
+          "n": 53
+        },
+        {
+          "kw": "뉴로모픽",
+          "n": 47
+        },
+        {
+          "kw": "GaN",
+          "n": 44
+        },
+        {
+          "kw": "TFT",
+          "n": 39
+        },
+        {
+          "kw": "Flexible/Wearable",
+          "n": 37
+        },
+        {
+          "kw": "GAA/Nanosheet FET",
+          "n": 35
+        },
+        {
+          "kw": "3D NAND",
+          "n": 30
+        },
+        {
+          "kw": "AI 프로세서",
+          "n": 27
+        },
+        {
+          "kw": "Flash 메모리",
+          "n": 24
+        },
+        {
+          "kw": "Ga₂O₃",
+          "n": 24
+        },
+        {
+          "kw": "AlGaN",
+          "n": 23
+        },
+        {
+          "kw": "SiC",
+          "n": 22
+        },
+        {
+          "kw": "EUV",
+          "n": 21
+        },
+        {
+          "kw": "ADC/DAC",
+          "n": 21
+        },
+        {
+          "kw": "Lithography(일반)",
+          "n": 18
+        },
+        {
+          "kw": "패키징(일반)",
+          "n": 16
+        },
+        {
+          "kw": "가스센서",
+          "n": 16
+        },
+        {
+          "kw": "광검출기/광트랜지스터",
+          "n": 15
+        },
+        {
+          "kw": "딥러닝/ML",
+          "n": 15
+        },
+        {
+          "kw": "LDO",
+          "n": 15
+        },
+        {
+          "kw": "Diamond",
+          "n": 14
+        },
+        {
+          "kw": "LLM/Transformer",
+          "n": 14
+        },
+        {
+          "kw": "MOSFET",
+          "n": 14
+        },
+        {
+          "kw": "PIM/IMC",
+          "n": 14
+        }
+      ],
+      "top_affiliations": [
+        {
+          "affil": "서울대학교",
+          "n": 258
+        },
+        {
+          "affil": "한양대학교",
+          "n": 165
+        },
+        {
+          "affil": "성균관대학교",
+          "n": 153
+        },
+        {
+          "affil": "고려대학교",
+          "n": 108
+        },
+        {
+          "affil": "KAIST",
+          "n": 89
+        },
+        {
+          "affil": "서울과학기술대학교",
+          "n": 86
+        },
+        {
+          "affil": "KIST",
+          "n": 86
+        },
+        {
+          "affil": "경희대학교",
+          "n": 75
+        },
+        {
+          "affil": "UNIST",
+          "n": 66
+        },
+        {
+          "affil": "가천대학교",
+          "n": 61
+        },
+        {
+          "affil": "아주대학교",
+          "n": 59
+        },
+        {
+          "affil": "연세대학교",
+          "n": 56
+        },
+        {
+          "affil": "POSTECH",
+          "n": 56
+        },
+        {
+          "affil": "삼성전자",
+          "n": 55
+        },
+        {
+          "affil": "인하대학교",
+          "n": 51
+        },
+        {
+          "affil": "홍익대학교",
+          "n": 47
+        },
+        {
+          "affil": "충남대학교",
+          "n": 41
+        },
+        {
+          "affil": "부산대학교",
+          "n": 38
+        },
+        {
+          "affil": "전남대학교",
+          "n": 36
+        },
+        {
+          "affil": "숭실대학교",
+          "n": 34
+        }
+      ]
+    }
+  },
+  "categories": [
+    {
+      "code": "D",
+      "name_en": "Thin Film Process Technology",
+      "name_kor": "박막공정 기술",
+      "by_year": {
+        "2023": 165,
+        "2024": 161,
+        "2025": 160,
+        "2026": 320
+      },
+      "scale": 806,
+      "activity": 1.191
+    },
+    {
+      "code": "K",
+      "name_en": "Memory (Design & Process Technology)",
+      "name_kor": "메모리",
+      "by_year": {
+        "2023": 111,
+        "2024": 146,
+        "2025": 142,
+        "2026": 253
+      },
+      "scale": 652,
+      "activity": 1.212
+    },
+    {
+      "code": "J",
+      "name_en": "Nano-Science & Technology",
+      "name_kor": "나노과학·기술",
+      "by_year": {
+        "2023": 106,
+        "2024": 87,
+        "2025": 123,
+        "2026": 182
+      },
+      "scale": 498,
+      "activity": 1.225
+    },
+    {
+      "code": "G",
+      "name_en": "Device & Process Modeling, Simulation and Reliability",
+      "name_kor": "소자/시뮬레이션",
+      "by_year": {
+        "2023": 65,
+        "2024": 95,
+        "2025": 115,
+        "2026": 148
+      },
+      "scale": 423,
+      "activity": 1.243
+    },
+    {
+      "code": "F",
+      "name_en": "Silicon and Group-IV Devices",
+      "name_kor": "실리콘·IV족 소자",
+      "by_year": {
+        "2023": 82,
+        "2024": 78,
+        "2025": 96,
+        "2026": 89
+      },
+      "scale": 345,
+      "activity": 1.072
+    },
+    {
+      "code": "S",
+      "name_en": "Chip Design Contest",
+      "name_kor": "Chip Design Contest",
+      "by_year": {
+        "2023": 72,
+        "2024": 55,
+        "2025": 91,
+        "2026": 86
+      },
+      "scale": 304,
+      "activity": 1.164
+    },
+    {
+      "code": "A",
+      "name_en": "Interconnect & Package",
+      "name_kor": "인터커넥트·패키지",
+      "by_year": {
+        "2023": 30,
+        "2024": 55,
+        "2025": 71,
+        "2026": 121
+      },
+      "scale": 277,
+      "activity": 1.386
+    },
+    {
+      "code": "C",
+      "name_en": "Material Growth & Characterization",
+      "name_kor": "물질 성장·특성평가",
+      "by_year": {
+        "2023": 73,
+        "2024": 45,
+        "2025": 54,
+        "2026": 72
+      },
+      "scale": 244,
+      "activity": 1.033
+    },
+    {
+      "code": "E",
+      "name_en": "Compound Semiconductors",
+      "name_kor": "화합물 반도체",
+      "by_year": {
+        "2023": 50,
+        "2024": 58,
+        "2025": 37,
+        "2026": 93
+      },
+      "scale": 238,
+      "activity": 1.092
+    },
+    {
+      "code": "V",
+      "name_en": "Quantum Technology",
+      "name_kor": "양자기술",
+      "by_year": {
+        "2023": 0,
+        "2024": 208,
+        "2025": 8,
+        "2026": 19
+      },
+      "scale": 235,
+      "activity": 0.23
+    },
+    {
+      "code": "I",
+      "name_en": "MEMS & Sensor Systems",
+      "name_kor": "MEMS·센서",
+      "by_year": {
+        "2023": 42,
+        "2024": 58,
+        "2025": 40,
+        "2026": 91
+      },
+      "scale": 231,
+      "activity": 1.134
+    },
+    {
+      "code": "H",
+      "name_en": "Display and Imaging Technologies",
+      "name_kor": "디스플레이·이미징",
+      "by_year": {
+        "2023": 41,
+        "2024": 69,
+        "2025": 8,
+        "2026": 75
+      },
+      "scale": 193,
+      "activity": 0.86
+    },
+    {
+      "code": "P",
+      "name_en": "Device for Energy",
+      "name_kor": "에너지소자",
+      "by_year": {
+        "2023": 62,
+        "2024": 24,
+        "2025": 45,
+        "2026": 43
+      },
+      "scale": 174,
+      "activity": 1.011
+    },
+    {
+      "code": "B",
+      "name_en": "Patterning",
+      "name_kor": "패터닝",
+      "by_year": {
+        "2023": 38,
+        "2024": 48,
+        "2025": 28,
+        "2026": 56
+      },
+      "scale": 170,
+      "activity": 0.988
+    },
+    {
+      "code": "Q",
+      "name_en": "Metrology, Inspection, and Yield Enhancement",
+      "name_kor": "계측·검사·수율",
+      "by_year": {
+        "2023": 37,
+        "2024": 46,
+        "2025": 32,
+        "2026": 48
+      },
+      "scale": 163,
+      "activity": 0.982
+    },
+    {
+      "code": "U",
+      "name_en": "Bio-Medical",
+      "name_kor": "Bio-Medical",
+      "by_year": {
+        "2023": 113,
+        "2024": 14,
+        "2025": 9,
+        "2026": 13
+      },
+      "scale": 149,
+      "activity": 0.295
+    },
+    {
+      "code": "L",
+      "name_en": "Analog Design",
+      "name_kor": "아날로그 설계",
+      "by_year": {
+        "2023": 28,
+        "2024": 20,
+        "2025": 39,
+        "2026": 29
+      },
+      "scale": 116,
+      "activity": 1.172
+    },
+    {
+      "code": "T",
+      "name_en": "AI",
+      "name_kor": "AI",
+      "by_year": {
+        "2023": 19,
+        "2024": 19,
+        "2025": 29,
+        "2026": 45
+      },
+      "scale": 112,
+      "activity": 1.321
+    },
+    {
+      "code": "N",
+      "name_en": "VLSI CAD",
+      "name_kor": "VLSI CAD",
+      "by_year": {
+        "2023": 16,
+        "2024": 22,
+        "2025": 12,
+        "2026": 29
+      },
+      "scale": 79,
+      "activity": 1.038
+    },
+    {
+      "code": "M",
+      "name_en": "RF and Wireless Design",
+      "name_kor": "RF·무선설계",
+      "by_year": {
+        "2023": 20,
+        "2024": 12,
+        "2025": 24,
+        "2026": 18
+      },
+      "scale": 74,
+      "activity": 1.135
+    },
+    {
+      "code": "O",
+      "name_en": "System LSI Design",
+      "name_kor": "시스템 LSI 설계",
+      "by_year": {
+        "2023": 25,
+        "2024": 16,
+        "2025": 5,
+        "2026": 23
+      },
+      "scale": 69,
+      "activity": 0.812
+    },
+    {
+      "code": "R",
+      "name_en": "Semiconductor Software",
+      "name_kor": "반도체 소프트웨어",
+      "by_year": {
+        "2023": 13,
+        "2024": 5,
+        "2025": 3,
+        "2026": 8
+      },
+      "scale": 29,
+      "activity": 0.759
+    }
+  ],
+  "keywords": [
+    {
+      "kw": "ALD",
+      "by_year": {
+        "2023": 75,
+        "2024": 71,
+        "2025": 57,
+        "2026": 111
+      },
+      "scale": 314,
+      "activity": 1.07
+    },
+    {
+      "kw": "강유전체",
+      "by_year": {
+        "2023": 59,
+        "2024": 68,
+        "2025": 44,
+        "2026": 104
+      },
+      "scale": 275,
+      "activity": 1.076
+    },
+    {
+      "kw": "TMD(2D)",
+      "by_year": {
+        "2023": 52,
+        "2024": 66,
+        "2025": 52,
+        "2026": 88
+      },
+      "scale": 258,
+      "activity": 1.085
+    },
+    {
+      "kw": "IGZO/산화물 반도체",
+      "by_year": {
+        "2023": 40,
+        "2024": 59,
+        "2025": 40,
+        "2026": 82
+      },
+      "scale": 221,
+      "activity": 1.104
+    },
+    {
+      "kw": "ReRAM/Memristor",
+      "by_year": {
+        "2023": 49,
+        "2024": 48,
+        "2025": 42,
+        "2026": 77
+      },
+      "scale": 216,
+      "activity": 1.102
+    },
+    {
+      "kw": "HfO₂/HZO",
+      "by_year": {
+        "2023": 34,
+        "2024": 46,
+        "2025": 25,
+        "2026": 78
+      },
+      "scale": 183,
+      "activity": 1.126
+    },
+    {
+      "kw": "DRAM",
+      "by_year": {
+        "2023": 27,
+        "2024": 40,
+        "2025": 33,
+        "2026": 53
+      },
+      "scale": 153,
+      "activity": 1.124
+    },
+    {
+      "kw": "TFT",
+      "by_year": {
+        "2023": 30,
+        "2024": 48,
+        "2025": 34,
+        "2026": 39
+      },
+      "scale": 151,
+      "activity": 0.967
+    },
+    {
+      "kw": "뉴로모픽",
+      "by_year": {
+        "2023": 43,
+        "2024": 29,
+        "2025": 21,
+        "2026": 47
+      },
+      "scale": 140,
+      "activity": 0.971
+    },
+    {
+      "kw": "GaN",
+      "by_year": {
+        "2023": 30,
+        "2024": 34,
+        "2025": 23,
+        "2026": 44
+      },
+      "scale": 131,
+      "activity": 1.023
+    },
+    {
+      "kw": "Flexible/Wearable",
+      "by_year": {
+        "2023": 23,
+        "2024": 29,
+        "2025": 19,
+        "2026": 37
+      },
+      "scale": 108,
+      "activity": 1.037
+    },
+    {
+      "kw": "3D NAND",
+      "by_year": {
+        "2023": 18,
+        "2024": 28,
+        "2025": 26,
+        "2026": 30
+      },
+      "scale": 102,
+      "activity": 1.098
+    },
+    {
+      "kw": "Ga₂O₃",
+      "by_year": {
+        "2023": 25,
+        "2024": 10,
+        "2025": 15,
+        "2026": 24
+      },
+      "scale": 74,
+      "activity": 1.054
+    },
+    {
+      "kw": "SiC",
+      "by_year": {
+        "2023": 11,
+        "2024": 23,
+        "2025": 16,
+        "2026": 22
+      },
+      "scale": 72,
+      "activity": 1.056
+    },
+    {
+      "kw": "GAA/Nanosheet FET",
+      "by_year": {
+        "2023": 10,
+        "2024": 11,
+        "2025": 12,
+        "2026": 35
+      },
+      "scale": 68,
+      "activity": 1.382
+    },
+    {
+      "kw": "ADC/DAC",
+      "by_year": {
+        "2023": 18,
+        "2024": 16,
+        "2025": 12,
+        "2026": 21
+      },
+      "scale": 67,
+      "activity": 0.985
+    },
+    {
+      "kw": "Flash 메모리",
+      "by_year": {
+        "2023": 14,
+        "2024": 14,
+        "2025": 14,
+        "2026": 24
+      },
+      "scale": 66,
+      "activity": 1.152
+    },
+    {
+      "kw": "AlGaN",
+      "by_year": {
+        "2023": 15,
+        "2024": 9,
+        "2025": 9,
+        "2026": 23
+      },
+      "scale": 56,
+      "activity": 1.143
+    },
+    {
+      "kw": "EUV",
+      "by_year": {
+        "2023": 10,
+        "2024": 15,
+        "2025": 9,
+        "2026": 21
+      },
+      "scale": 55,
+      "activity": 1.091
+    },
+    {
+      "kw": "Perovskite",
+      "by_year": {
+        "2023": 16,
+        "2024": 12,
+        "2025": 13,
+        "2026": 12
+      },
+      "scale": 53,
+      "activity": 0.943
+    },
+    {
+      "kw": "딥러닝/ML",
+      "by_year": {
+        "2023": 12,
+        "2024": 13,
+        "2025": 12,
+        "2026": 15
+      },
+      "scale": 52,
+      "activity": 1.038
+    },
+    {
+      "kw": "광검출기/광트랜지스터",
+      "by_year": {
+        "2023": 11,
+        "2024": 11,
+        "2025": 11,
+        "2026": 15
+      },
+      "scale": 48,
+      "activity": 1.083
+    },
+    {
+      "kw": "AI 프로세서",
+      "by_year": {
+        "2023": 3,
+        "2024": 9,
+        "2025": 9,
+        "2026": 27
+      },
+      "scale": 48,
+      "activity": 1.5
+    },
+    {
+      "kw": "MOSFET",
+      "by_year": {
+        "2023": 11,
+        "2024": 12,
+        "2025": 10,
+        "2026": 14
+      },
+      "scale": 47,
+      "activity": 1.021
+    },
+    {
+      "kw": "이미지센서",
+      "by_year": {
+        "2023": 8,
+        "2024": 14,
+        "2025": 10,
+        "2026": 13
+      },
+      "scale": 45,
+      "activity": 1.022
+    },
+    {
+      "kw": "인공 시냅스",
+      "by_year": {
+        "2023": 13,
+        "2024": 12,
+        "2025": 12,
+        "2026": 8
+      },
+      "scale": 45,
+      "activity": 0.889
+    },
+    {
+      "kw": "가스센서",
+      "by_year": {
+        "2023": 14,
+        "2024": 5,
+        "2025": 9,
+        "2026": 16
+      },
+      "scale": 44,
+      "activity": 1.136
+    },
+    {
+      "kw": "Lithography(일반)",
+      "by_year": {
+        "2023": 7,
+        "2024": 8,
+        "2025": 9,
+        "2026": 18
+      },
+      "scale": 42,
+      "activity": 1.286
+    },
+    {
+      "kw": "패키징(일반)",
+      "by_year": {
+        "2023": 3,
+        "2024": 13,
+        "2025": 10,
+        "2026": 16
+      },
+      "scale": 42,
+      "activity": 1.238
+    },
+    {
+      "kw": "Diamond",
+      "by_year": {
+        "2023": 19,
+        "2024": 0,
+        "2025": 4,
+        "2026": 14
+      },
+      "scale": 37,
+      "activity": 0.973
+    },
+    {
+      "kw": "PIM/IMC",
+      "by_year": {
+        "2023": 7,
+        "2024": 13,
+        "2025": 3,
+        "2026": 14
+      },
+      "scale": 37,
+      "activity": 0.919
+    },
+    {
+      "kw": "FTJ/FeRAM/FeFET",
+      "by_year": {
+        "2023": 7,
+        "2024": 8,
+        "2025": 7,
+        "2026": 12
+      },
+      "scale": 34,
+      "activity": 1.118
+    },
+    {
+      "kw": "Spiking NN",
+      "by_year": {
+        "2023": 9,
+        "2024": 4,
+        "2025": 10,
+        "2026": 11
+      },
+      "scale": 34,
+      "activity": 1.235
+    },
+    {
+      "kw": "배터리·슈퍼커패시터",
+      "by_year": {
+        "2023": 11,
+        "2024": 6,
+        "2025": 6,
+        "2026": 10
+      },
+      "scale": 33,
+      "activity": 0.97
+    },
+    {
+      "kw": "SRAM",
+      "by_year": {
+        "2023": 8,
+        "2024": 10,
+        "2025": 8,
+        "2026": 7
+      },
+      "scale": 33,
+      "activity": 0.909
+    },
+    {
+      "kw": "LDO",
+      "by_year": {
+        "2023": 3,
+        "2024": 4,
+        "2025": 9,
+        "2026": 15
+      },
+      "scale": 31,
+      "activity": 1.548
+    },
+    {
+      "kw": "Quantum Dot",
+      "by_year": {
+        "2023": 6,
+        "2024": 13,
+        "2025": 4,
+        "2026": 7
+      },
+      "scale": 30,
+      "activity": 0.733
+    },
+    {
+      "kw": "InP",
+      "by_year": {
+        "2023": 6,
+        "2024": 8,
+        "2025": 6,
+        "2026": 10
+      },
+      "scale": 30,
+      "activity": 1.067
+    },
+    {
+      "kw": "태양전지",
+      "by_year": {
+        "2023": 10,
+        "2024": 9,
+        "2025": 5,
+        "2026": 5
+      },
+      "scale": 29,
+      "activity": 0.69
+    },
+    {
+      "kw": "HEMT/HFET",
+      "by_year": {
+        "2023": 9,
+        "2024": 5,
+        "2025": 4,
+        "2026": 11
+      },
+      "scale": 29,
+      "activity": 1.034
+    },
+    {
+      "kw": "전력반도체",
+      "by_year": {
+        "2023": 3,
+        "2024": 13,
+        "2025": 3,
+        "2026": 9
+      },
+      "scale": 28,
+      "activity": 0.857
+    },
+    {
+      "kw": "InGaAs",
+      "by_year": {
+        "2023": 5,
+        "2024": 5,
+        "2025": 5,
+        "2026": 11
+      },
+      "scale": 26,
+      "activity": 1.231
+    },
+    {
+      "kw": "MOCVD",
+      "by_year": {
+        "2023": 5,
+        "2024": 6,
+        "2025": 7,
+        "2026": 8
+      },
+      "scale": 26,
+      "activity": 1.154
+    },
+    {
+      "kw": "ALE",
+      "by_year": {
+        "2023": 4,
+        "2024": 5,
+        "2025": 2,
+        "2026": 14
+      },
+      "scale": 25,
+      "activity": 1.28
+    },
+    {
+      "kw": "CVD",
+      "by_year": {
+        "2023": 5,
+        "2024": 6,
+        "2025": 4,
+        "2026": 10
+      },
+      "scale": 25,
+      "activity": 1.12
+    },
+    {
+      "kw": "h-BN",
+      "by_year": {
+        "2023": 10,
+        "2024": 4,
+        "2025": 3,
+        "2026": 7
+      },
+      "scale": 24,
+      "activity": 0.833
+    },
+    {
+      "kw": "바이오센서",
+      "by_year": {
+        "2023": 7,
+        "2024": 5,
+        "2025": 6,
+        "2026": 6
+      },
+      "scale": 24,
+      "activity": 1.0
+    },
+    {
+      "kw": "Energy Harvesting",
+      "by_year": {
+        "2023": 4,
+        "2024": 6,
+        "2025": 4,
+        "2026": 8
+      },
+      "scale": 22,
+      "activity": 1.091
+    },
+    {
+      "kw": "MEMS/NEMS",
+      "by_year": {
+        "2023": 4,
+        "2024": 8,
+        "2025": 2,
+        "2026": 7
+      },
+      "scale": 21,
+      "activity": 0.857
+    },
+    {
+      "kw": "OLED",
+      "by_year": {
+        "2023": 2,
+        "2024": 5,
+        "2025": 9,
+        "2026": 5
+      },
+      "scale": 21,
+      "activity": 1.333
+    },
+    {
+      "kw": "LLM/Transformer",
+      "by_year": {
+        "2023": 1,
+        "2024": 2,
+        "2025": 4,
+        "2026": 14
+      },
+      "scale": 21,
+      "activity": 1.714
+    },
+    {
+      "kw": "CMP",
+      "by_year": {
+        "2023": 0,
+        "2024": 6,
+        "2025": 6,
+        "2026": 7
+      },
+      "scale": 19,
+      "activity": 1.368
+    },
+    {
+      "kw": "열전소자",
+      "by_year": {
+        "2023": 6,
+        "2024": 2,
+        "2025": 3,
+        "2026": 7
+      },
+      "scale": 18,
+      "activity": 1.111
+    },
+    {
+      "kw": "LED",
+      "by_year": {
+        "2023": 5,
+        "2024": 5,
+        "2025": 5,
+        "2026": 3
+      },
+      "scale": 18,
+      "activity": 0.889
+    },
+    {
+      "kw": "실리콘 포토닉스",
+      "by_year": {
+        "2023": 3,
+        "2024": 8,
+        "2025": 1,
+        "2026": 6
+      },
+      "scale": 18,
+      "activity": 0.778
+    },
+    {
+      "kw": "CNN",
+      "by_year": {
+        "2023": 5,
+        "2024": 7,
+        "2025": 3,
+        "2026": 3
+      },
+      "scale": 18,
+      "activity": 0.667
+    },
+    {
+      "kw": "MXene",
+      "by_year": {
+        "2023": 4,
+        "2024": 3,
+        "2025": 2,
+        "2026": 9
+      },
+      "scale": 18,
+      "activity": 1.222
+    },
+    {
+      "kw": "CAM/TCAM",
+      "by_year": {
+        "2023": 4,
+        "2024": 3,
+        "2025": 3,
+        "2026": 8
+      },
+      "scale": 18,
+      "activity": 1.222
+    },
+    {
+      "kw": "HBM",
+      "by_year": {
+        "2023": 3,
+        "2024": 2,
+        "2025": 4,
+        "2026": 8
+      },
+      "scale": 17,
+      "activity": 1.412
+    },
+    {
+      "kw": "GaAs",
+      "by_year": {
+        "2023": 6,
+        "2024": 3,
+        "2025": 5,
+        "2026": 2
+      },
+      "scale": 16,
+      "activity": 0.875
+    }
+  ],
+  "affiliations": [
+    {
+      "affil": "서울대학교",
+      "by_year": {
+        "2023": 141,
+        "2024": 103,
+        "2025": 117,
+        "2026": 258
+      },
+      "scale": 619,
+      "activity": 1.212
+    },
+    {
+      "affil": "한양대학교",
+      "by_year": {
+        "2023": 71,
+        "2024": 93,
+        "2025": 75,
+        "2026": 165
+      },
+      "scale": 404,
+      "activity": 1.188
+    },
+    {
+      "affil": "성균관대학교",
+      "by_year": {
+        "2023": 72,
+        "2024": 103,
+        "2025": 69,
+        "2026": 153
+      },
+      "scale": 397,
+      "activity": 1.118
+    },
+    {
+      "affil": "고려대학교",
+      "by_year": {
+        "2023": 69,
+        "2024": 73,
+        "2025": 75,
+        "2026": 108
+      },
+      "scale": 325,
+      "activity": 1.126
+    },
+    {
+      "affil": "KIST",
+      "by_year": {
+        "2023": 90,
+        "2024": 51,
+        "2025": 66,
+        "2026": 86
+      },
+      "scale": 293,
+      "activity": 1.038
+    },
+    {
+      "affil": "KAIST",
+      "by_year": {
+        "2023": 71,
+        "2024": 72,
+        "2025": 36,
+        "2026": 89
+      },
+      "scale": 268,
+      "activity": 0.933
+    },
+    {
+      "affil": "POSTECH",
+      "by_year": {
+        "2023": 45,
+        "2024": 77,
+        "2025": 58,
+        "2026": 56
+      },
+      "scale": 236,
+      "activity": 0.966
+    },
+    {
+      "affil": "서울과학기술대학교",
+      "by_year": {
+        "2023": 28,
+        "2024": 48,
+        "2025": 55,
+        "2026": 86
+      },
+      "scale": 217,
+      "activity": 1.3
+    },
+    {
+      "affil": "UNIST",
+      "by_year": {
+        "2023": 39,
+        "2024": 43,
+        "2025": 33,
+        "2026": 66
+      },
+      "scale": 181,
+      "activity": 1.094
+    },
+    {
+      "affil": "연세대학교",
+      "by_year": {
+        "2023": 46,
+        "2024": 42,
+        "2025": 35,
+        "2026": 56
+      },
+      "scale": 179,
+      "activity": 1.017
+    },
+    {
+      "affil": "경희대학교",
+      "by_year": {
+        "2023": 34,
+        "2024": 37,
+        "2025": 18,
+        "2026": 75
+      },
+      "scale": 164,
+      "activity": 1.134
+    },
+    {
+      "affil": "아주대학교",
+      "by_year": {
+        "2023": 47,
+        "2024": 17,
+        "2025": 33,
+        "2026": 59
+      },
+      "scale": 156,
+      "activity": 1.179
+    },
+    {
+      "affil": "경북대학교",
+      "by_year": {
+        "2023": 33,
+        "2024": 57,
+        "2025": 31,
+        "2026": 32
+      },
+      "scale": 153,
+      "activity": 0.824
+    },
+    {
+      "affil": "UST",
+      "by_year": {
+        "2023": 43,
+        "2024": 38,
+        "2025": 55,
+        "2026": 15
+      },
+      "scale": 151,
+      "activity": 0.927
+    },
+    {
+      "affil": "홍익대학교",
+      "by_year": {
+        "2023": 33,
+        "2024": 32,
+        "2025": 32,
+        "2026": 47
+      },
+      "scale": 144,
+      "activity": 1.097
+    },
+    {
+      "affil": "가천대학교",
+      "by_year": {
+        "2023": 18,
+        "2024": 20,
+        "2025": 39,
+        "2026": 61
+      },
+      "scale": 138,
+      "activity": 1.449
+    },
+    {
+      "affil": "삼성전자",
+      "by_year": {
+        "2023": 28,
+        "2024": 35,
+        "2025": 15,
+        "2026": 55
+      },
+      "scale": 133,
+      "activity": 1.053
+    },
+    {
+      "affil": "서강대학교",
+      "by_year": {
+        "2023": 26,
+        "2024": 34,
+        "2025": 44,
+        "2026": 27
+      },
+      "scale": 131,
+      "activity": 1.084
+    },
+    {
+      "affil": "인하대학교",
+      "by_year": {
+        "2023": 29,
+        "2024": 23,
+        "2025": 24,
+        "2026": 51
+      },
+      "scale": 127,
+      "activity": 1.181
+    },
+    {
+      "affil": "충남대학교",
+      "by_year": {
+        "2023": 35,
+        "2024": 32,
+        "2025": 16,
+        "2026": 41
+      },
+      "scale": 124,
+      "activity": 0.919
+    },
+    {
+      "affil": "충북대학교",
+      "by_year": {
+        "2023": 21,
+        "2024": 26,
+        "2025": 26,
+        "2026": 32
+      },
+      "scale": 105,
+      "activity": 1.105
+    },
+    {
+      "affil": "서울시립대학교",
+      "by_year": {
+        "2023": 22,
+        "2024": 29,
+        "2025": 24,
+        "2026": 23
+      },
+      "scale": 98,
+      "activity": 0.959
+    },
+    {
+      "affil": "광운대학교",
+      "by_year": {
+        "2023": 20,
+        "2024": 32,
+        "2025": 23,
+        "2026": 19
+      },
+      "scale": 94,
+      "activity": 0.894
+    },
+    {
+      "affil": "인천대학교",
+      "by_year": {
+        "2023": 19,
+        "2024": 26,
+        "2025": 23,
+        "2026": 25
+      },
+      "scale": 93,
+      "activity": 1.032
+    },
+    {
+      "affil": "전북대학교",
+      "by_year": {
+        "2023": 25,
+        "2024": 28,
+        "2025": 20,
+        "2026": 19
+      },
+      "scale": 92,
+      "activity": 0.848
+    },
+    {
+      "affil": "SK하이닉스",
+      "by_year": {
+        "2023": 27,
+        "2024": 31,
+        "2025": 16,
+        "2026": 16
+      },
+      "scale": 90,
+      "activity": 0.711
+    },
+    {
+      "affil": "세종대학교",
+      "by_year": {
+        "2023": 34,
+        "2024": 14,
+        "2025": 12,
+        "2026": 30
+      },
+      "scale": 90,
+      "activity": 0.933
+    },
+    {
+      "affil": "부산대학교",
+      "by_year": {
+        "2023": 10,
+        "2024": 18,
+        "2025": 21,
+        "2026": 38
+      },
+      "scale": 87,
+      "activity": 1.356
+    },
+    {
+      "affil": "국민대학교",
+      "by_year": {
+        "2023": 24,
+        "2024": 36,
+        "2025": 6,
+        "2026": 18
+      },
+      "scale": 84,
+      "activity": 0.571
+    },
+    {
+      "affil": "숭실대학교",
+      "by_year": {
+        "2023": 14,
+        "2024": 14,
+        "2025": 19,
+        "2026": 34
+      },
+      "scale": 81,
+      "activity": 1.309
+    }
+  ]
+}
+</script>
+
+<script>
+const DATA = JSON.parse(document.getElementById('dashData').textContent);
+const YEARS = DATA.years;
+const TOTAL_ALL = Object.values(DATA.year_meta).reduce((s,m) => s + m.total, 0);
+
+const PALETTE = [
+  '#b8420b', '#1c5b66', '#a0791b', '#5c4033', '#7a6240', '#345e5e',
+  '#8c4a39', '#4a5f3a', '#735d2f', '#5a4a6e', '#8d5524', '#3d5a6c',
+  '#9c5f3a', '#2e6e4a', '#6d4c3d', '#7e5d3b', '#525f3e', '#a4682b',
+  '#4c5d72', '#6f3a3a', '#4d5e2f', '#86545b', '#3a5054',
+];
+function colorOf(i) { return PALETTE[i % PALETTE.length]; }
+function fmt(n) { return n.toLocaleString('ko-KR'); }
+document.getElementById('genDate').textContent =
+  new Date().toISOString().slice(0,10).replace(/-/g, '.');
+
+// ============ State ============
+let selectedYear = 'all';
+let selectedMode = 'category'; // category | keyword | affil
+let highlightedKey = null;
+
+// ============ Year Tabs ============
+function renderYearTabs() {
+  const c = document.getElementById('yearTabs');
+  const items = [
+    { key: 'all', label: '전체 (4년)', sub: `${fmt(TOTAL_ALL)}건` },
+    ...YEARS.map(y => ({
+      key: String(y),
+      label: `KCS ${y}`,
+      sub: `${fmt(DATA.year_meta[y].total)}건`,
+    })),
+  ];
+  items.forEach(it => {
+    const btn = document.createElement('div');
+    btn.className = 'year-tab' + (it.key === selectedYear ? ' active' : '');
+    btn.dataset.year = it.key;
+    btn.innerHTML = `
+      <div>
+        <div class="year-num">${it.key === 'all' ? '전체' : it.key}</div>
+        <div style="font-size:11px; color:var(--ink-mute); margin-top:2px;">${it.label.replace(/^전체.*|KCS \d+/, '')}</div>
+      </div>
+      <div class="year-total">${it.sub}</div>
+    `;
+    btn.addEventListener('click', () => {
+      selectedYear = it.key;
+      document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      renderYearBanner();
+      renderTable();
+      highlightedKey = null;
+      showEmptyPanel();
+      updateChart();
+    });
+    c.appendChild(btn);
+  });
+}
+renderYearTabs();
+
+// ============ Year Banner ============
+function renderYearBanner() {
+  const c = document.getElementById('yearBanner');
+  if (selectedYear === 'all') {
+    const totalAll = Object.values(DATA.year_meta).reduce((s,m) => s + m.total, 0);
+    const oralAll = Object.values(DATA.year_meta).reduce((s,m) => s + m.oral, 0);
+    const postAll = Object.values(DATA.year_meta).reduce((s,m) => s + m.poster, 0);
+    c.innerHTML = `
+      <div class="year-banner-title">
+        <span class="name">전체 분석 기간 (2023-2026)</span>
+        <span class="subtitle">4 years · KCS proceedings analysis</span>
+      </div>
+      <div class="year-banner-stat">
+        <div class="label">총 발표</div>
+        <div class="value">${fmt(totalAll)}<span class="unit">건</span></div>
+      </div>
+      <div class="year-banner-stat">
+        <div class="label">구두</div>
+        <div class="value">${fmt(oralAll)}<span class="unit">건</span></div>
+      </div>
+      <div class="year-banner-stat">
+        <div class="label">포스터</div>
+        <div class="value">${fmt(postAll)}<span class="unit">건</span></div>
+      </div>
+    `;
+  } else {
+    const m = DATA.year_meta[selectedYear];
+    const idx = YEARS.indexOf(parseInt(selectedYear));
+    const prev = idx > 0 ? DATA.year_meta[YEARS[idx-1]].total : null;
+    let delta = '';
+    if (prev !== null) {
+      const pct = ((m.total - prev) / prev * 100);
+      const sign = pct >= 0 ? '+' : '';
+      const cls = pct >= 0 ? 'up' : 'down';
+      delta = `<div class="delta ${cls}">${sign}${pct.toFixed(1)}% YoY</div>`;
+    }
+    c.innerHTML = `
+      <div class="year-banner-title">
+        <span class="name">${m.title}</span>
+        <span class="subtitle">${m.subtitle || ''}</span>
+      </div>
+      <div class="year-banner-stat">
+        <div class="label">총 발표</div>
+        <div class="value">${fmt(m.total)}<span class="unit">건</span></div>
+        ${delta}
+      </div>
+      <div class="year-banner-stat">
+        <div class="label">구두</div>
+        <div class="value">${fmt(m.oral)}<span class="unit">건</span></div>
+      </div>
+      <div class="year-banner-stat">
+        <div class="label">포스터</div>
+        <div class="value">${fmt(m.poster)}<span class="unit">건</span></div>
+      </div>
+    `;
+  }
+}
+renderYearBanner();
+
+// ============ Counts on chart tab badges ============
+document.getElementById('catNum').textContent = `(${DATA.categories.length})`;
+document.getElementById('kwNum').textContent = `(${DATA.keywords.length})`;
+document.getElementById('afNum').textContent = `(${DATA.affiliations.length})`;
+
+// ============ Build chart data ============
+function getItems(mode) {
+  if (mode === 'category') return DATA.categories.map(c => ({
+    key: c.code,
+    name: c.name_kor,
+    nameEn: c.name_en,
+    code: c.code,
+    scale: c.scale,
+    activity: c.activity,
+    by_year: c.by_year,
+  }));
+  if (mode === 'keyword') return DATA.keywords.map(k => ({
+    key: k.kw,
+    name: k.kw,
+    nameEn: '',
+    code: '',
+    scale: k.scale,
+    activity: k.activity,
+    by_year: k.by_year,
+  }));
+  return DATA.affiliations.map(a => ({
+    key: a.affil,
+    name: a.affil,
+    nameEn: '',
+    code: '',
+    scale: a.scale,
+    activity: a.activity,
+    by_year: a.by_year,
+  }));
+}
+
+// Quadrant from (scale, activity, medians)
+function getQuadrant(item, medianScale) {
+  const sBig = item.scale >= medianScale;
+  const aHigh = item.activity >= 1.0;
+  if (sBig && aHigh) return { name: '핵심 부상', color: 'var(--q1)', cls: 'q1' };
+  if (!sBig && aHigh) return { name: '신흥', color: 'var(--q2)', cls: 'q2' };
+  if (!sBig && !aHigh) return { name: '비주류', color: 'var(--q3)', cls: 'q3' };
+  return { name: '주류·성숙', color: 'var(--q4)', cls: 'q4' };
+}
+
+// ============ Chart ============
+const ctx = document.getElementById('stratChart').getContext('2d');
+const chart = new Chart(ctx, {
+  type: 'scatter',
+  data: { datasets: [] },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    onClick: (evt, els) => {
+      if (els.length) {
+        const idx = els[0].datasetIndex;
+        const ds = chart.data.datasets[idx];
+        if (highlightedKey === ds._item.key) {
+          highlightedKey = null;
+          showEmptyPanel();
+        } else {
+          highlightedKey = ds._item.key;
+          showDetail(ds._item);
+        }
+        applyHighlight();
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1a1a1a',
+        titleFont: { family: 'IBM Plex Mono, monospace', size: 11, weight: '600' },
+        bodyFont: { family: 'Pretendard Variable, sans-serif', size: 12 },
+        padding: 12,
+        borderColor: '#b8420b', borderWidth: 1, cornerRadius: 0,
+        displayColors: false,
+        callbacks: {
+          title: function(items) {
+            const it = items[0].dataset._item;
+            return `${it.code ? '['+it.code+'] ' : ''}${it.name}`;
+          },
+          label: function(item) { return ''; },
+          afterBody: function(items) {
+            const it = items[0].dataset._item;
+            const lines = [
+              `규모성 (총 발표): ${it.scale}건`,
+              `활동성 지수: ${it.activity.toFixed(2)}`,
+              '',
+            ];
+            YEARS.forEach(y => {
+              lines.push(`  ${y}: ${it.by_year[y] || 0}건`);
+            });
+            return lines;
+          }
+        }
+      },
+    },
+    scales: {
+      x: {
+        type: 'linear',
+        title: { display: true, text: '규모성 (4년 누적 발표 수)', color: '#8a8a8a',
+                 font: { family: 'IBM Plex Mono, monospace', size: 11 } },
+        ticks: { color: '#4a4a4a',
+                 font: { family: 'IBM Plex Mono, monospace', size: 11 } },
+        grid: { color: 'rgba(0,0,0,0.04)' },
+        border: { color: '#1a1a1a' },
+      },
+      y: {
+        title: { display: true, text: '활동성 (최근 집중도 · 균등 = 1.0)', color: '#8a8a8a',
+                 font: { family: 'IBM Plex Mono, monospace', size: 11 } },
+        ticks: { color: '#4a4a4a',
+                 font: { family: 'IBM Plex Mono, monospace', size: 11 } },
+        grid: { color: 'rgba(0,0,0,0.04)' },
+        border: { color: '#1a1a1a' },
+      },
+    },
+  },
+  // 사분면 reference line plugin
+  plugins: [{
+    id: 'medianLines',
+    afterDraw(chart) {
+      const { ctx, chartArea, scales } = chart;
+      if (!chartArea) return;
+      // y = 1.0 line (균등)
+      const y1 = scales.y.getPixelForValue(1.0);
+      ctx.save();
+      ctx.strokeStyle = 'rgba(184,66,11,0.4)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 3]);
+      ctx.beginPath();
+      ctx.moveTo(chartArea.left, y1);
+      ctx.lineTo(chartArea.right, y1);
+      ctx.stroke();
+      // x = median scale
+      const medianScale = chart._medianScale || 0;
+      if (medianScale > 0) {
+        const x1 = scales.x.getPixelForValue(medianScale);
+        ctx.beginPath();
+        ctx.moveTo(x1, chartArea.top);
+        ctx.lineTo(x1, chartArea.bottom);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+  }]
+});
+
+function updateChart() {
+  let items = getItems(selectedMode);
+
+  // 검색 필터링
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  if (q) {
+    items = items.filter(it =>
+      (it.name + ' ' + (it.nameEn||'') + ' ' + (it.code||'')).toLowerCase().includes(q)
+    );
+  }
+
+  // 연도 필터: selectedYear가 'all'이 아니면 그 연도에 발표가 있는 항목만
+  if (selectedYear !== 'all') {
+    const yr = parseInt(selectedYear);
+    items = items.filter(it => (it.by_year[yr] || 0) > 0);
+  }
+
+  // 사분면 기준점: scale의 중앙값
+  const scales = items.map(it => it.scale).sort((a,b) => a-b);
+  const medianScale = scales.length ? scales[Math.floor(scales.length / 2)] : 0;
+
+  chart._medianScale = medianScale;
+
+  // Build datasets
+  chart.data.datasets = items.map((it, i) => {
+    const q = getQuadrant(it, medianScale);
+    const color = q.cls === 'q1' ? '#2d6e3e'
+                : q.cls === 'q2' ? '#b8420b'
+                : q.cls === 'q3' ? '#8a8a8a'
+                : '#1c5b66';
+    return {
+      label: it.name,
+      data: [{ x: it.scale, y: it.activity }],
+      backgroundColor: color + '99',
+      borderColor: color,
+      borderWidth: 1.5,
+      pointRadius: Math.max(5, Math.min(18, Math.sqrt(it.scale) * 0.8)),
+      pointHoverRadius: Math.max(8, Math.min(22, Math.sqrt(it.scale) * 1.0)),
+      _item: it,
+      _color: color,
+    };
+  });
+
+  applyHighlight();
+  chart.update();
+}
+
+function applyHighlight() {
+  chart.data.datasets.forEach((ds, i) => {
+    const isMatch = highlightedKey && ds._item.key === highlightedKey;
+    if (highlightedKey === null) {
+      ds.borderWidth = 1.5;
+      ds.backgroundColor = ds._color + '99';
+      ds.borderColor = ds._color;
+    } else if (isMatch) {
+      ds.borderWidth = 3;
+      ds.backgroundColor = ds._color;
+      ds.borderColor = '#1a1a1a';
+      ds.pointRadius = Math.max(10, ds.pointRadius);
+    } else {
+      ds.borderWidth = 1;
+      ds.backgroundColor = ds._color + '22';
+      ds.borderColor = ds._color + '55';
+    }
+  });
+  chart.update('none');
+}
+
+// ============ Chart mode tabs ============
+document.querySelectorAll('.chart-tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.chart-tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    selectedMode = t.dataset.mode;
+    highlightedKey = null;
+    showEmptyPanel();
+    updateChart();
+    renderTable();
+  });
+});
+
+// ============ Side panel ============
+function showEmptyPanel() {
+  document.getElementById('sidePanel').innerHTML = `
+    <div class="side-empty">
+      <span class="icon serif">↻</span>
+      그래프에서 점을 클릭하면<br>상세 정보가 여기에 나타나요.
+    </div>
+  `;
+}
+
+function showDetail(item) {
+  const maxY = Math.max(...YEARS.map(y => item.by_year[y] || 0));
+  const yearBars = YEARS.map(y => {
+    const n = item.by_year[y] || 0;
+    const pct = maxY > 0 ? (n / maxY) * 100 : 0;
+    const hi = selectedYear !== 'all' && String(y) === selectedYear;
+    return `
+      <div class="yearly-bars">
+        <span class="ybars-label">${y}</span>
+        <span class="ybars-bar"><span class="ybars-fill ${hi ? 'highlighted' : ''}" style="width:${pct}%"></span></span>
+        <span class="ybars-num">${n}</span>
+      </div>
+    `;
+  }).join('');
+
+  // 사분면 분류
+  const items = getItems(selectedMode);
+  const scales = items.map(it => it.scale).sort((a,b) => a-b);
+  const median = scales.length ? scales[Math.floor(scales.length / 2)] : 0;
+  const q = getQuadrant(item, median);
+
+  const codePart = selectedMode === 'category' ? `분과 [${item.code}]`
+                 : selectedMode === 'keyword' ? '키워드'
+                 : '기관';
+
+  document.getElementById('sidePanel').innerHTML = `
+    <div class="detail-head">
+      <div class="detail-code">${codePart}</div>
+      <div class="detail-name">${item.name}</div>
+      ${item.nameEn ? `<div class="detail-en">${item.nameEn}</div>` : ''}
+      <div class="detail-quadrant" style="color:${q.color};">${q.name}</div>
+    </div>
+    <div class="detail-stats">
+      <div class="detail-stat">
+        <div class="label">규모성 (4년 누적)</div>
+        <div class="value">${item.scale}<span style="font-size:11px;color:var(--ink-mute);"> 건</span></div>
+      </div>
+      <div class="detail-stat">
+        <div class="label">활동성 지수</div>
+        <div class="value">${item.activity.toFixed(2)}</div>
+      </div>
+    </div>
+    <div class="detail-section-title">연도별 추이</div>
+    ${yearBars}
+  `;
+}
+
+// ============ Data Table ============
+function activityClass(a) {
+  if (a >= 1.15) return 'high';
+  if (a <= 0.85) return 'low';
+  return 'mid';
+}
+
+function sparkline(byYear) {
+  const vals = YEARS.map(y => byYear[y] || 0);
+  const max = Math.max(...vals, 1);
+  return `<div class="spark">${vals.map((v, i) => {
+    const h = (v / max) * 22;
+    const hi = selectedYear !== 'all' && String(YEARS[i]) === selectedYear;
+    return `<div class="spark-bar ${hi ? 'highlight' : ''}" style="height:${h}px;" title="${YEARS[i]}: ${v}"></div>`;
+  }).join('')}</div>`;
+}
+
+function renderTable() {
+  const titles = { category: '분과별', keyword: '키워드별', affil: '기관별' };
+  const titleText = selectedYear === 'all'
+    ? `${titles[selectedMode]} 4년 데이터`
+    : `${titles[selectedMode]} 데이터 · ${selectedYear} 기준`;
+  document.getElementById('tableTitle').textContent = titleText;
+
+  const head = document.getElementById('tableHead');
+  const cells = ['#', selectedMode === 'category' ? '분과명' : selectedMode === 'keyword' ? '키워드' : '기관명'];
+  YEARS.forEach(y => cells.push(`<span style="text-align:right;display:block;">${y}</span>`));
+  cells.push('<span style="text-align:right;display:block;">규모성</span>');
+  cells.push('<span style="text-align:right;display:block;">활동성</span>');
+  cells.push('<span style="text-align:right;display:block;">추이</span>');
+  head.innerHTML = cells.map((c, i) => {
+    const isNum = i > 1;
+    return `<th${isNum ? ' class="num"' : ''}>${c}</th>`;
+  }).join('');
+
+  let items = getItems(selectedMode);
+  if (selectedYear !== 'all') {
+    const yr = parseInt(selectedYear);
+    items.sort((a, b) => (b.by_year[yr] || 0) - (a.by_year[yr] || 0));
+  } else {
+    items.sort((a, b) => b.scale - a.scale);
+  }
+  // 검색 필터
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  if (q) {
+    items = items.filter(it =>
+      (it.name + ' ' + (it.nameEn||'') + ' ' + (it.code||'')).toLowerCase().includes(q)
+    );
+  }
+
+  const tbody = document.querySelector('#dataTable tbody');
+  tbody.innerHTML = '';
+
+  // 최대 50개만 표시 (스크롤 부담 줄이기)
+  items.slice(0, 50).forEach((it, i) => {
+    const tr = document.createElement('tr');
+    const isZero = selectedYear !== 'all' && (it.by_year[parseInt(selectedYear)] || 0) === 0;
+    if (isZero) tr.classList.add('year-zero');
+
+    let cells = [];
+    if (selectedMode === 'category') {
+      cells.push(`<td class="code">${it.code}</td>`);
+      cells.push(`<td>${it.name}</td>`);
+    } else {
+      cells.push(`<td class="code">${(i+1).toString().padStart(2,'0')}</td>`);
+      cells.push(`<td>${it.name}</td>`);
+    }
+    YEARS.forEach(y => {
+      const isHi = selectedYear === String(y);
+      const n = it.by_year[y] || 0;
+      cells.push(`<td class="num" ${isHi ? 'style="color:var(--accent);font-weight:600;"' : ''}>${n}</td>`);
+    });
+    cells.push(`<td class="num">${it.scale}</td>`);
+    cells.push(`<td class="num"><span class="activity-chip ${activityClass(it.activity)}">${it.activity.toFixed(2)}</span></td>`);
+    cells.push(`<td class="num">${sparkline(it.by_year)}</td>`);
+    tr.innerHTML = cells.join('');
+
+    tr.addEventListener('click', () => {
+      highlightedKey = it.key;
+      showDetail(it);
+      applyHighlight();
+      // 화면을 차트 쪽으로 스크롤
+      document.querySelector('.strat-container').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+    tbody.appendChild(tr);
+  });
+}
+
+// ============ Search ============
+function applySearchFilter() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  document.getElementById('searchClear').style.display = q ? 'inline-block' : 'none';
+
+  let cVis = 0, kVis = 0, aVis = 0;
+  if (q) {
+    cVis = DATA.categories.filter(c => (c.name_kor + ' ' + c.name_en + ' ' + c.code).toLowerCase().includes(q)).length;
+    kVis = DATA.keywords.filter(k => k.kw.toLowerCase().includes(q)).length;
+    aVis = DATA.affiliations.filter(a => a.affil.toLowerCase().includes(q)).length;
+  }
+  document.getElementById('searchMeta').textContent = q
+    ? `분과 ${cVis} · 키워드 ${kVis} · 기관 ${aVis}`
+    : '';
+
+  updateChart();
+  renderTable();
+}
+document.getElementById('searchInput').addEventListener('input', applySearchFilter);
+document.getElementById('searchClear').addEventListener('click', () => {
+  document.getElementById('searchInput').value = '';
+  applySearchFilter();
+});
+
+// ============ Initial render ============
+updateChart();
+renderTable();
+</script>
+
+</body>
+</html>
